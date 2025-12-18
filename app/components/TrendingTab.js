@@ -1,11 +1,8 @@
-"use client";
-import useSWR from "swr";
-
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
-import { Poster } from "./Poster";
-import { TabSkeleton } from "./TabSkeleton";
-import { Suspense } from "react";
-
+import { AnimeTab } from "./AnimeTab";
+import { MovieTab } from "./MovieTab";
+import { TvTab } from "./TvTab";
+import { MangaTab } from "./MangaTab";
 export function TrendingTab() {
   return (
     <div className="">
@@ -29,34 +26,18 @@ export function TrendingTab() {
             <TabPanel>
               <AnimeTab />
             </TabPanel>
-            <TabPanel></TabPanel>
-            <TabPanel>tv</TabPanel>
-            <TabPanel>manga</TabPanel>
+            <TabPanel>
+              <MovieTab />
+            </TabPanel>
+            <TabPanel>
+              <TvTab />
+            </TabPanel>
+            <TabPanel>
+              <MangaTab />
+            </TabPanel>
           </TabPanels>
         </TabGroup>
       </div>
-    </div>
-  );
-}
-
-function AnimeTab() {
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data, error, isLoading } = useSWR(
-    "https://api.jikan.moe/v4/top/anime?type=tv&limit=5&filter=airing",
-    fetcher
-  );
-
-  if (error) return <div>Failed to load</div>;
-
-  if (isLoading) return <TabSkeleton />;
-  return (
-    <div className="flex gap-12">
-      {data.data.map((anime) => (
-        <div key={anime.mal_id} className="">
-          <Poster key={anime.mal_id} url={anime.images.webp.large_image_url} />
-          <p className="text-xl">{anime.titles[0].title}</p>
-        </div>
-      ))}
     </div>
   );
 }

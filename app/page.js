@@ -19,7 +19,7 @@ export default async function Home() {
             >
               Discover
             </span>{" "}
-            Trending entertainment. <br /> One place.
+            Trending entertainment. <br /> All in one place.
           </h1>
           <p className="text-2xl md:text-3xl lg:text-4xl text-slate-400 max-w-[40ch]">
             Real-time trends from movies, TV shows, anime, and manga - updated
